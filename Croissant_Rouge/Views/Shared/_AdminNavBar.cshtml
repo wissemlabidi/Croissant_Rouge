@@ -1,0 +1,35 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <h2>Admin</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Donations" asp-action="AllDonations">All Donations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Donations" asp-action="ValidateDonations">Validate Donations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Shippers" asp-action="CreateShipper">Create Shipper</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Shippers" asp-action="ShipperList">Our Shipper</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Addmin" asp-action="Events">Events</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <form asp-action="Logout" asp-controller="Users" method="post">
+                    <input type="submit" value="Logout" class="btn btn-Link btn-lg">
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>

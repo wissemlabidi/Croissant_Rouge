@@ -1,0 +1,120 @@
+﻿@model List<Donation>
+@await Html.PartialAsync("_AdminNavbar")
+<div class="container">
+    <h1>All Donations</h1>
+
+    <div class="row">
+        <div class="card mb-4">
+            <h2 class="card-header">MEDICATIONS</h2>
+            <p class="card-body">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi eius quibusdam modi fugiat aperiam dolorem magnam, corporis animi maiores minima!</p>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (Donation donation in Model)
+        {
+            @if (@donation.Category.ToString() == "Medication")
+            {
+                <div class="col-sm-6 col-lg-3 col-md-3 m-3">
+                    <div class="card border-white rounded" style="width: 20rem;">
+                        <img class="card-img-top mt-2" style="height: 20rem;" src="@donation.Picture" alt="@donation.Title">
+                        <div class="card-body d-flex justify-content-between" style="height: 15rem;">
+                            <div class="d-flex flex-column gap-2">
+                                <a href="donations/@donation.DonationId" class="card-title h5 text-info">@donation.Title</a>
+                                <p class="card-text">By : <span class="text-muted">@donation.Donner.FirstName</span></p>
+                                <p class="card-text">quantity : <span class="text-muted">@donation.Quantity</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+
+    <div class="row">
+        <div class="card mb-4">
+            <h2 class="card-header">FOOD</h2>
+            <p class="card-body">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi eius quibusdam modi fugiat aperiam dolorem magnam, corporis animi maiores minima!</p>
+        </div>
+    </div>
+    <div class="row">
+
+        @foreach (Donation donation in Model)
+        {
+            @if (@donation.Category.ToString() == "Food")
+            {
+                <div class="col-sm-6 col-lg-3 col-md-3 m-3">
+                    <div class="card border-white rounded" style="width: 20rem;">
+                        <img class="card-img-top mt-2" style="height: 20rem;" src="@donation.Picture" alt="@donation.Title">
+                        <div class="card-body d-flex justify-content-between" style="height: 15rem;">
+                            <div class="d-flex flex-column gap-2">
+                                <a href="donations/@donation.DonationId" class="card-title h5 text-info">@donation.Title</a>
+                                <p class="card-text">By : <span class="text-muted">@donation.Donner.FirstName</span></p>
+                                <p class="card-text">quantity : <span class="text-muted">@donation.Quantity</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+
+    <div class="row">
+        <div class="card mb-4">
+            <h2 class="card-header">CLOTHING</h2>
+            <p class="card-body">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi eius quibusdam modi fugiat aperiam dolorem magnam, corporis animi maiores minima!</p>
+        </div>
+    </div>
+    <div class="row">
+
+        @foreach (Donation donation in Model)
+        {
+            @if (@donation.Category.ToString() == "Clothing")
+            {
+                <div class="col-sm-6 col-lg-3 col-md-3 m-3">
+                    <div class="card border-white rounded" style="width: 20rem;">
+                        <img class="card-img-top mt-2" style="height: 20rem;" src="@donation.Picture" alt="@donation.Title">
+                        <div class="card-body d-flex justify-content-between" style="height: 15rem;">
+                            <div class="d-flex flex-column gap-2">
+                                <a href="donations/@donation.DonationId" class="card-title h5 text-info">@donation.Title</a>
+                                <p class="card-text">By : <span class="text-muted">@donation.Donner.FirstName</span></p>
+                                <p class="card-text">quantity : <span class="text-muted">@donation.Quantity</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+
+    <div class="row">
+        <div class="card mb-4">
+            <h2 class="card-header">EQUIPEMENTS</h2>
+            <p class="card-body">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi eius quibusdam modi fugiat aperiam dolorem magnam, corporis animi maiores minima!</p>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (Donation donation in Model)
+        {
+            @if (@donation.Category.ToString() == "Equipment")
+            {
+                <div class="col-sm-6 col-lg-3 col-md-3 m-3">
+                    <div class="card border-white rounded" style="width: 20rem;">
+                        <img class="card-img-top mt-2" style="height: 20rem;" src="@donation.Picture" alt="@donation.Title">
+                        <div class="card-body d-flex justify-content-between" style="height: 15rem;">
+                            <div class="d-flex flex-column gap-2">
+                                <a href="donations/@donation.DonationId" class="card-title h5 text-info">@donation.Title</a>
+                                <p class="card-text">By : <span class="text-muted">@donation.Donner.FirstName</span></p>
+                                <p class="card-text">quantity : <span class="text-muted">@donation.Quantity</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+

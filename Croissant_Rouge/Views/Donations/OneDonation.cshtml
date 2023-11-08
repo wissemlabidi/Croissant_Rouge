@@ -1,0 +1,33 @@
+﻿@{
+    int UserIdFromSession = (int)Context.Session.GetInt32("userId");
+}
+@model Donation
+@await Html.PartialAsync("_AdminNavBar")
+
+<div class="container">
+    <h1>@Model.Title</h1>
+    <div class="row d-flex gap-2 mt-4">
+        <div class="col-5">
+            <img src="@Model.Picture" alt="@Model.Title" class="img-fluid rounded border">
+        </div>
+        <div class="col-6">
+            <div>
+                <p class="mb-3 h3">Category : @Model.Category</p>
+                <p class="mb-3 h3">Quantity : @Model.Quantity</p>
+                <p class="mb-3 h3">Donor : @Model.Donner.FirstName</p>
+                <p class="mb-3 h3">Description : @Model.Description</p>
+            </div>
+            <div class="d-flex gap-3">
+                <button class="btn btn-primary w-30"><a href="/Donations" style="color: white; text-decoration: none">Cancel</a></button>
+                <form asp-action="ValidateDonation" asp-route-donationId="@Model.DonationId" asp-controller="Donations" method="post">
+                    <input type="hidden" name="donationId" value="@Model.DonationId">
+                    <input type="submit" value="Accepte" class="btn btn-success w-30">
+                </form>
+                <form asp-action="DeleteDonation" asp-controller="Donations" method="post">
+                    <input type="hidden" name="donationId" value="@Model.DonationId">
+                    <input type="submit" value="Refuse" class="btn btn-danger w-30">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model List<User>
+@await Html.PartialAsync("_AdminNavbar")
+<div class="container">
+    <div class="card shadow">
+        <h1 class="card-head">Our Shipper</h1>
+        <div class="card-body">
+            <table class="table table-striped border">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Bun Shipper</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (User user in Model.Where(user => user.Role.ToString() == "Shipper"))
+                    {
+                        <tr>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.Phone</td>
+                            <td>@user.Address</td>
+                            <td>
+                                <form asp-action="DeleteShipper" asp-controller="Shippers" method="post">
+                                    <input type="hidden" name="userId" value="@user.UserId">
+                                    <input type="submit" value="Bun" class="btn btn-danger w-30">
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

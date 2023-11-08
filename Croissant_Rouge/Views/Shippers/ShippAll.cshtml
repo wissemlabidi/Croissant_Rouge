@@ -1,0 +1,56 @@
+﻿@model List<Donation>
+@{
+    string donner = $"{Model[0].Donner.FirstName} {Model[0].Donner.LastName}";
+    int userId = (int)Context.Session.GetInt32("userId");
+}
+
+@await Html.PartialAsync("_ShipperNav")
+<h1>Donations Number: @Model.Count() ****** @Model</h1>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-3">
+        <h4 class="display-6">All @donner Donations Available for Shipping </h4>
+
+
+
+
+        @*<form asp-action="ShipManyDonations" asp-controller="Shippers" method="post">
+            <input type="submit" class="btn btn-outline-primary btn-lg" value="Ship All Donations" />
+            <input type="hidden" asp-for="@Model" name="donations"/>
+         </form>*@
+    </div>
+    <table class="table table-striped hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Ship</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var a in Model.Where(donation => donation.status.ToString() == "Valid" && donation.Shipment == null))
+            {
+                <tr>
+
+                    <td>@a.Title</td>
+                    <td>@a.Category</td>
+                    <td>@a.Quantity</td>
+                    <td>
+                        @{
+
+                            Shipment newShippment = new()
+                            {
+                                UserId = userId,
+                                DonationId = a.DonationId,
+                            };
+                            @await Html.PartialAsync("_ShipDonation", newShippment)
+                        }
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

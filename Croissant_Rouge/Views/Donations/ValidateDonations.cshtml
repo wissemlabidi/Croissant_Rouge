@@ -1,0 +1,40 @@
+﻿@model List<Donation>
+@await Html.PartialAsync("_AdminNavBar")
+<div class="container">
+    <div class="card shadow">
+        <h1 class="card-head">Donations To Delivered</h1>
+        <div class="card-body">
+            <table class="table table-striped border">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Doner</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Shipper</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Donation donation in Model.Where(donation => donation.status.ToString() == "Valid"))
+                    {
+                        <tr>
+                            <td>@donation.Title</td>
+                            <td>@donation.Category</td>
+                            <td>@donation.Quantity</td>
+                            <td>@donation.Donner.FirstName</td>
+                            <td>@donation.Donner.Address</td>
+                            <td>@donation.Donner.Phone</td>
+                            @if (@donation.Shipment != null)
+                            {
+                                <td>@donation.Shipment.Shipper.FirstName</td>
+                                <td>@donation.Shipment.ShipStatus</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

@@ -1,0 +1,75 @@
+﻿@model List<Donation>
+
+<!DOCTYPE html>
+<html>
+@await Html.PartialAsync("_UserNav")
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="~/css/Card.css" asp-append-version="true" />
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="main-body">
+            <div class="justify-content-end m-2">
+                <a href="/EditProfile" class="btn btn-danger "> Edit Profile </a>
+            </div>
+            <h1 class="text-danger">My Donations :</h1>
+            <div class="d-flex flex-wrap">
+
+                @foreach (Donation donnation in Model)
+                {
+                    <article class="card card--1">
+                        <div class="card__info-hover">
+                            <svg class="card__like" viewBox="0 0 24 24">
+                                <!-- SVG Path Content -->
+                            </svg>
+                            <div class="card__clock-info">
+                                <svg class="card__clock" viewBox="0 0 24 24">
+                                    <!-- SVG Path Content -->
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card__img"></div>
+                        <img src="@donnation.Picture" alt="@donnation.Title">
+                        <div class="card__img--hover"></div>
+                        <div class="card__info">
+                            <div>
+                                <p class="card-text">Title: @donnation.Title <span class="text-muted"></span></p>
+                                <p class="card-text">Quantity: @donnation.Quantity <span class="text-muted"></span></p>
+                                <p class="card-text">Category: @donnation.Category <span class="text-muted"></span></p>
+
+                                @if (donnation.status.ToString() == "Unvalid")
+                                {
+                                    <h5>Hello @donnation.Donner.FirstName please wait to validate your donnation !!</h5>
+                                }
+                                else
+                                {
+                                    if (donnation.Shipment is null)
+                                    {
+                                        <h5>Hello @donnation.Donner.FirstName  your donnation is valid. Please wait for our shipper !!</h5>
+                                    }
+                                    else
+                                    {
+                                        if (donnation.Shipment.ShipStatus.ToString() == "InShipping")
+                                        {
+
+                                            <h5>Hello @donnation.Donner.FirstName your donnation is valid. The shipper @donnation.Shipment.Shipper.FirstName on  his way to you !!</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5>Hello @donnation.Donner.FirstName we resived your donnation. Thank you !!</h5>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </article>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

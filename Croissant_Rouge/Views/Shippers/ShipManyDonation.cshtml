@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Project Page";
+    int userId = (int)Context.Session.GetInt32("userId");
+
+}
+
+
+
+@model Shipment
+
+
+
+<form asp-action="ShipManyDonation" asp-controller="Shippers" method="post">
+
+
+    <input type="hidden" asp-for="@Model.UserId">
+    <input type="hidden" asp-for="@Model.DonationId">
+    <input type="hidden" name="ShipStatus" value="InShipping" asp-for="@Model.ShipStatus">
+    <button type="submit" class="btn btn-primary">✅ Ship this Donation</button>
+
+</form>

@@ -1,0 +1,8 @@
+﻿@model Money
+
+
+<form method="post" asp-action="CreateMoney">
+    <input type="hidden" asp-for="UserId" value="1">
+    <input type="number" id="Amount" name="amount" asp-for="Amount" required>
+    <button class="give-button" type="submit">Donate Now</button>
+</form>

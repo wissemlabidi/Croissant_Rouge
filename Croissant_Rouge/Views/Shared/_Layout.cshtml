@@ -1,0 +1,46 @@
+﻿@{
+    int? userId = Context.Session.GetInt32("userId"); // Use nullable int
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Croissant_Rouge</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+    <link rel="stylesheet" href="~/Croissant_Rouge.styles.css" asp-append-version="true" />
+    <style>
+        .navbar {
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="container-fluid ">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @await Html.PartialAsync("_Footer")
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Home.js" asp-append-version="true"></script>
+
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

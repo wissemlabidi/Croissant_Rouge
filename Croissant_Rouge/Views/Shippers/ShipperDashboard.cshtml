@@ -1,0 +1,129 @@
+﻿@{
+    int userId = (int)Context.Session.GetInt32("userId");
+}
+@await Html.PartialAsync("_ShipperNav")
+
+@model ShipmentAndDonations
+
+
+<div class="container">
+    <h1>Welcome Shipper @userId</h1>
+</div>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th scope="col">Title</th>
+            <th scope="col">Category</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Adress</th>
+            <th scope="col">Phone</th>
+            <th>Donner</th>
+            <th scope="col">Shipper</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var a in Model.Alldonations)
+        {
+            if (a.Shipment != null && a.Shipment.ShipStatus.ToString() != "Received" || a.Shipment == null)
+            {
+
+                <tr>
+                    <td>@a.Title</td>
+                    <td>@a.Category</td>
+                    <td>@a.Quantity</td>
+                    <td>@a.Donner.Address</td>
+                    <td>@a.Donner.Phone</td>
+                    <td>
+                        <a asp-action="ShippAll" asp-controller="Shippers" asp-route-userId="@a.UserId"
+                           onmouseover="moreSippments('@a.DonationId')" id="@a.DonationId"
+                           onmouseout="reset('@a.Donner.FirstName @a.Donner.LastName', '@a.DonationId')"
+                           class="h6 text-decoration-none">@a.Donner.FirstName @a.Donner.LastName</a>
+                    </td>
+                    <td>
+                        @{
+                            Shipment newShippment = new()
+                            {
+                                UserId = userId,
+                                DonationId = a.DonationId,
+                            };
+                            @await Html.PartialAsync("_ShipDonation", newShippment)
+                        }
+                    </td>
+                    @if (@a.Shipment != null)
+                    {
+                        <td>
+                            <form asp-action="AcceptShipping" asp-route-id="@a.Shipment.ShipmentId" asp-controller="Shippers" method="post">
+                                <input type="hidden" name="ShipmentId">
+                                <input type="submit" value="Shipment Received" class="btn btn-success w-30">
+                            </form>
+
+                        </td>
+                    }
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+
+
+
+
+<h1>All My Shipments </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Donation Title</th>
+            <th scope="col">Image</th>
+            <th scope="col">Category</th>
+            <th scope="col">Donator Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Adress</th>
+            <th scope="col">Quantity</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var a in Model.AllShippments)
+        {
+            <tr>
+
+                <td>@a.Donation.Title</td>
+
+                <td>
+                    <img src="@a.Donation.Picture" style="width:40px; height:40px"></img>
+                </td>
+                <td>@a.Donation.Category</td>
+                <td>@a.Donation.Quantity</td>
+                <td>@a.Donation.Donner.FirstName @a.Donation.Donner.LastName  </td>
+                <td>@a.Donation.Donner.Address</td>
+                <td>@a.Donation.Quantity</td>
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+<script>function moreSippments(id) {
+        var element = document.getElementById(id)
+        element.innerText = "More for this Donner"
+        element.className = "btn btn-info btn-sm"
+    } function reset(text, id) {
+        var element = document.getElementById(id)
+        element.innerText = text
+        element.className = "h6 text-decoration-none"
+    }
+</script>

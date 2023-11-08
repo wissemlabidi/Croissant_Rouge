@@ -1,0 +1,84 @@
+﻿@model User
+<!DOCTYPE html>
+<html>
+@await Html.PartialAsync("_VisitorNav")
+<head>
+    <title>User Profile</title>
+</head>
+
+<body>
+    <form asp-action="EditProfile2" asp-controller="Users" method="post">
+        <div class="container">
+            <div class="main-body">
+                <div class="row justify-content-center">
+                    <!-- Center the content -->
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">First Name:</h6>
+                                        <input type="text" name="FirstName" value="@Model.FirstName" />
+                                        <span asp-validation-for="FirstName" class="text-danger h4"></span>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Last Name:</h6>
+                                        <input type="text" name="LastName" value="@Model.LastName" />
+                                        <span asp-validation-for="LastName" class="text-danger h4"></span>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email: </h6>
+                                        <input type="text" name="Email" value="@Model.Email" />
+                                        <span asp-validation-for="Email" class="text-danger h4"></span>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone: </h6>
+                                        <input type="text" name="Phone" value="@Model.Phone" />
+                                        <span asp-validation-for="Phone" class="text-danger h4"></span>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Address: </h6>
+                                        <input type="text" name="Address" value="@Model.Address" />
+                                        <span asp-validation-for="Address" class="text-danger h4"></span>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row justify-content-center">
+                                    <!-- Center the button -->
+                                    <div class="col-sm-3">
+                                        <input type="hidden" name="UserId" value="@Model.UserId" />
+                                        <input type="submit" value="Update" class="btn btn-danger w-75"> <!-- Reduced the button width -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

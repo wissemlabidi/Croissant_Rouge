@@ -1,0 +1,375 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Home Page";
+    int? userId = Context.Session.GetInt32("userId");
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .red-button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .red-button:hover {
+                background-color: darkred;
+            }
+
+
+
+        a.btn {
+            background: teal;
+            border-radius: 4px;
+            box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
+            color: white;
+            display: inline-block;
+            padding: 6px 30px 8px;
+            position: relative;
+            text-decoration: none;
+        }
+
+
+
+        div.cards {
+            margin: 80px auto;
+            max-width: 1350px;
+            display:flex;
+            justify-content:space-between;
+            text-align: center;
+        }
+
+        div.card {
+            background: white;
+            display: inline-block;
+            margin: 8px;
+            max-width: 300px;
+            position: relative;
+            text-align: left;
+            transition: all 0.3s 0s ease-in;
+            width: 300px;
+            z-index: 1;
+        }
+
+            div.card img {
+                max-width: 300px;
+                height: 223px;
+            }
+
+        .card__image-holder {
+            background: rgba(0, 0, 0, 0.1);
+            height: 0;
+            padding-bottom: 75%;
+        }
+
+        div.card-title {
+            background: white;
+            padding: 6px 15px 10px;
+            position: relative;
+            z-index: 0;
+        }
+
+            div.card-title a.toggle-info {
+                border-radius: 32px;
+                height: 32px;
+                padding: 0;
+                position: absolute;
+                right: 15px;
+                top: 10px;
+                width: 32px;
+                background-color: #0096a0;
+            }
+
+                div.card-title a.toggle-info span {
+                    background: white;
+                    display: block;
+                    height: 2px;
+                    position: absolute;
+                    top: 16px;
+                    transition: all 0.15s 0s ease-out;
+                    width: 12px;
+                }
+
+                    div.card-title a.toggle-info span.left {
+                        right: 12px;
+                        transform: rotate(45deg);
+                        background-color: white;
+                    }
+
+                    div.card-title a.toggle-info span.right {
+                        left: 13px;
+                        transform: rotate(-45deg);
+                        background-color: white;
+                    }
+
+            div.card-title h2 {
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: -0.05em;
+                margin: 0;
+                padding: 0;
+            }
+
+                div.card-title h2 small {
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 600;
+                    letter-spacing: -0.025em;
+                }
+
+        div.card-description {
+            padding: 0 15px 10px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        div.card-actions {
+            box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+            padding: 10px 15px 20px;
+            text-align: center;
+        }
+
+        div.card-flap {
+            background: rgba(0, 0, 0, 0.15);
+            position: absolute;
+            width: 100%;
+            transform-origin: top;
+            transform: rotateX(-90deg);
+        }
+
+        div.flap1 {
+            transition: all 0.3s 0.3s ease-out;
+            z-index: -1;
+        }
+
+        div.flap2 {
+            transition: all 0.3s 0s ease-out;
+            z-index: -2;
+        }
+
+        div.cards.showing div.card {
+            cursor: pointer;
+            opacity: 0.6;
+            transform: scale(0.88);
+        }
+
+        .no-touch div.cards.showing div.card:hover {
+            opacity: 0.94;
+            transform: scale(0.92);
+        }
+
+        div.card.show {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+            div.card.show div.card-title a.toggle-info {
+                background-color: red;
+            }
+
+                div.card.show div.card-title a.toggle-info span {
+                    top: 14px;
+                }
+
+                    div.card.show div.card-title a.toggle-info span.left {
+                        right: 9px;
+                        background-color: white;
+                    }
+
+                    div.card.show div.card-title a.toggle-info span.right {
+                        left: 10px;
+                        background-color: white;
+                    }
+
+            div.card.show div.card-flap {
+                background: white;
+                transform: rotateX(0deg);
+            }
+
+            div.card.show div.flap1 {
+                transition: all 0.3s 0s ease-out;
+            }
+
+            div.card.show div.flap2 {
+                transition: all 0.3s 0.2s ease-out;
+            }
+    </style>
+
+    @if (userId == null)
+    {
+        @await Html.PartialAsync("_VisitorNav")
+
+    }
+    else
+    {
+        if (Model.Role.ToString() == "Shipper")
+        {
+            @await Html.PartialAsync("_ShipperNav")
+        }
+        else if (Model.Role.ToString() == "User")
+        {
+            @await Html.PartialAsync("_UserNav")
+        }
+        else
+        {
+            @await Html.PartialAsync("_AdminNavBar")
+        }
+    }
+
+</head>
+
+<body>
+    <header class="container">
+        <div style="background: linear-gradient(to right,rgba(51,51,51,0.6),rgba(51,51,51,0)),
+    url('https://www.redcross.org/content/dam/redcross/homepage-assets/fdr-banners/disaster-relief/2023/8-1-generic-dr-desktop.jpg.transform/1288/q70/feature/image.jpeg')
+    no-repeat; height: 480px ">
+            <div class="container-fluid" style=" padding-left:70px;padding-top:150px ">
+                <h1 style="color: white; font-family: Roboto,Arial,Helvetica Neue,Helvetica,sans-serif; font-weight: 900;">
+                    You Can Make a Difference
+                </h1>
+                <h6 style="color: white; font-weight: 400; font-family: Roboto,Arial,Helvetica Neue,Helvetica,sans-serif; font-size: 2.1rem;">
+                    Your financial gift helps people<br>
+                    affected by disasters big and small.
+                </h6>
+            </div>
+            <a href="/MoneyDonation" style="padding:50px;padding-left:80px">
+                <button class="red-button" style="font-size: 1.5vw; font-family: Roboto; font-weight: 700; ">Donate Now</button>
+            </a>
+        </div>
+    </header>
+    <h1 style="margin-top:50px; text-align:center ;font-family:  Roboto,Arial,Helvetica Neue,Helvetica,sans-serif;
+        font-size: 3.2rem;
+        font-weight: 900;
+        line-height: 1.2;
+        color: #333;">
+        Other Ways to Donate
+    </h1>
+
+    <div>
+        <div class="cards">
+
+            <div class="card">
+                <div class="card__image-holder">
+                    <img class="card__image" src="https://i0.wp.com/lapresse.tn/wp-content/uploads/2022/10/emballage-me%CC%81dicament.jpg?fit=850%2C491&ssl=1" alt="Medicaments" />
+                </div>
+                <div class="card-title">
+                    <a href="#" class="toggle-info btn">
+                        <span class="left"></span>
+                        <span class="right"></span>
+                    </a>
+                    <h2>
+                        Medicine
+                        <small>You Can Donate Now</small>
+                    </h2>
+                </div>
+                <div class="card-flap flap1">
+                    <div class="card-description">
+                        This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
+                    </div>
+                    <div class="card-flap flap2">
+                        <div class="card-actions">
+                            <a href="#" class="btn">Click Here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__image-holder">
+                    <img class="card__image" src="https://hips.hearstapps.com/hmg-prod/images/new-jersey-jersey-city-woman-preparing-clothing-for-royalty-free-image-1602269635.jpg?crop=0.901xw:0.413xh;0.0986xw,0.563xh&resize=980:*" alt="Clothing" />
+                </div>
+                <div class="card-title">
+                    <a href="#" class="toggle-info btn">
+                        <span class="left"></span>
+                        <span class="right"></span>
+                    </a>
+                    <h2>
+                        Clothing
+                        <small>You Can Donate Now</small>
+                    </h2>
+                </div>
+                <div class="card-flap flap1">
+                    <div class="card-description">
+                        This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
+                    </div>
+                    <div class="card-flap flap2">
+                        <div class="card-actions">
+                            <a href="#" class="btn">Click Here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__image-holder">
+                    <img class="card__image" src="https://thinkoutsidethebin.files.wordpress.com/2011/09/052111-039.jpg" alt="equipment" />
+                </div>
+                <div class="card-title">
+                    <a href="#" class="toggle-info btn">
+                        <span class="left"></span>
+                        <span class="right"></span>
+                    </a>
+                    <h2>
+                        Equipments
+                        <small>You Can Donate Now</small>
+                    </h2>
+                </div>
+                <div class="card-flap flap1">
+                    <div class="card-description">
+                        This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
+                    </div>
+                    <div class="card-flap flap2">
+                        <div class="card-actions">
+                            <a href="#" class="btn">Click Here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__image-holder">
+                    <img class="card__image" src="https://cdn.vox-cdn.com/thumbor/7ViIOskIfW4xkZg7bmzhp5srUsw=/0x0:5184x3456/1200x800/filters:focal(2178x1314:3006x2142)/cdn.vox-cdn.com/uploads/chorus_image/image/67983487/shutterstock_1711992256.0.jpg" alt="food" />
+                </div>
+                <div class="card-title">
+                    <a href="#" class="toggle-info btn">
+                        <span class="left"></span>
+                        <span class="right"></span>
+                    </a>
+                    <h2>
+                        Food
+                        <small>You Can Donate Now</small>
+                    </h2>
+                </div>
+                <div class="card-flap flap1">
+                    <div class="card-description">
+                        This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
+                    </div>
+                    <div class="card-flap flap2">
+                        <div class="card-actions">
+                            <a href="#" class="btn">Click Here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <br />
+    <br />
+
+    @section Scripts{
+        <script src="~/js/Categories.js"></script>
+    }
+</body>
+</html>

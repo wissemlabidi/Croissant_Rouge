@@ -1,0 +1,89 @@
+﻿@model Donation
+@{
+    int userId = (int)Context.Session.GetInt32("userId");
+}
+
+@await Html.PartialAsync("_UserNav")
+
+
+<style>
+    .red-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .red-button:hover {
+            background-color: darkred;
+        }
+</style>
+<html>
+
+<body>
+    <div class="gradient-box">
+        <div>
+            <h1 style="margin-left:500px ;font-size:  4rem; font-family: Roboto,Arial,Helvetica Neue,Helvetica,sans-serif;">Donate Now</h1>
+
+            <div class="contact-container">
+                <div class="left-col">
+                    <img class="logo" src="https://www.croissant-rouge.tn/logo.png" />
+                </div>
+                <div class="right-col">
+
+
+
+                    <h6 style="margin-bottom:30px">Turn your compassion into action and set an example for others by remembering the Red Cross in your will, trust or other planned gift. No gift has a more lasting impact.</h6>
+
+                    <form asp-action="CreateDonation" asp-controller="Donations" method="post" enctype="multipart/form-data">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" type="text" class="form-control" placeholder="Title" aria-label="Title">
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                        <input type="hidden" name="UserId" value="@userId" />
+                        <br />
+                        <label asp-for="Category" class="form-label"></label>
+                        <select class="form-select" asp-for="Category">
+                            <option selected>Choose your Category</option>
+                            <option asp-value="Medication">Medication</option>
+                            <option asp-value="Equipment">Equipment</option>
+                            <option asp-value="Clothing">Clothing</option>
+                            <option asp-value="Food">Food</option>
+                        </select>
+                        <br />
+                        <label asp-for="Quantity" class="form-label"></label>
+                        <input asp-for="Quantity" type="number" class="form-control" placeholder="Quantity"
+                               aria-label="Quantity">
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                        <br />
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <br />
+                        <label asp-for="Picture" class="form-label"></label>
+                        <input type="file" id="imageFile" name="imageFile" class="form-control" style="border: black solid 1px;" accept=".jpg, .jpeg, .png, .gif" />
+
+
+                        <button class="red-button" type="submit" id="submit" name="submit">Send</button>
+
+                    </form>
+
+                    <div id="error"></div>
+                    <div id="success-msg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+        <script src="~/js/Donate.js">
+
+        </script>
+    }
+</body>
+</html>
+
+
+
+
