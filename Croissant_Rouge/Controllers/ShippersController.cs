@@ -59,9 +59,8 @@ public class ShippersController : Controller
     {
         if (ModelState.IsValid)
         {
-            int? userId = (int)HttpContext.Session.GetInt32("userId");
-
-
+            var userIdFromSession = HttpContext.Session.GetInt32("userId");
+            //newShippment.UserId = (int)HttpContext.Session.GetInt32("userId");
             //1 Add 
             _context.Add(newShippment);
 
@@ -180,14 +179,14 @@ public class ShippersController : Controller
 
 
     [HttpGet("ShippAll")]
-    public IActionResult ShippAll(int userId)
+    public IActionResult ShippAll(int donnerId)
     {
         if (HttpContext.Session.GetInt32("userId") == null)
         {
             return RedirectToAction("LogReg", "Users");
         }
         List<Donation> userDonnations = _context.Donations
-            .Where(donation => donation.UserId == userId && donation.status == StaticData.Status.Valid && donation.Shipment == null)
+            .Where(donation => donation.UserId == donnerId && donation.status == StaticData.Status.Valid && donation.Shipment == null)
             .Include(donation => donation.Donner)
             .Include(donation => donation.Shipment)
             .ToList();

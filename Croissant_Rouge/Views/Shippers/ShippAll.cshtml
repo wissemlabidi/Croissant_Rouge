@@ -25,7 +25,8 @@
                 <th>Title</th>
                 <th>Category</th>
                 <th>Quantity</th>
-                <th>Ship</th>
+                <th>DonnerId</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -43,7 +44,7 @@
 
                             Shipment newShippments = new()
                             {
-                                UserId = userId,
+                            UserId = (int)Context.Session.GetInt32("userId"),
                                 DonationId = a.DonationId,
                             };
                             @await Html.PartialAsync("_ShipDonation", newShippments)

@@ -40,7 +40,7 @@
                     <td>@a.Donner.Address</td>
                     <td>@a.Donner.Phone</td>
                     <td>
-                        <a asp-action="ShippAll" asp-controller="Shippers" asp-route-userId="@a.UserId"
+                        <a asp-action="ShippAll" asp-controller="Shippers" asp-route-donnerId="@a.UserId"
                            onmouseover="moreSippments('@a.DonationId')" id="@a.DonationId"
                            onmouseout="reset('@a.Donner.FirstName @a.Donner.LastName', '@a.DonationId')"
                            class="h6 text-decoration-none">@a.Donner.FirstName @a.Donner.LastName</a>
