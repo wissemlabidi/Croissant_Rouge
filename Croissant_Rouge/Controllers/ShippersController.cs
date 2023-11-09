@@ -187,7 +187,7 @@ public class ShippersController : Controller
             return RedirectToAction("LogReg", "Users");
         }
         List<Donation> userDonnations = _context.Donations
-            .Where(donation => donation.UserId == userId)
+            .Where(donation => donation.UserId == userId && donation.status == StaticData.Status.Valid && donation.Shipment == null)
             .Include(donation => donation.Donner)
             .Include(donation => donation.Shipment)
             .ToList();

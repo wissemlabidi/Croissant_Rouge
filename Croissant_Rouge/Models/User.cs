@@ -1,4 +1,5 @@
 ﻿using Croissant_Rouge.Utility;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 #pragma warning disable CS8618
@@ -40,14 +41,6 @@ namespace Croissant_Rouge.Models
         //Address
         [Required(ErrorMessage = "Please enter your Address.")]
         public string Address { get; set; }
-
-        //CIN
-        [MinLength(8, ErrorMessage = "Unvalid CIN number")]
-        public string CIN { get; set; }
-
-
-
-
 
 
         [Required(ErrorMessage = "What is your role")]
