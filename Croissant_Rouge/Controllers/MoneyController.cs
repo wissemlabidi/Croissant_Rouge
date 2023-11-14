@@ -2,6 +2,7 @@
 using Stripe;
 using Stripe.Checkout;
 using Croissant_Rouge.Models;
+using Microsoft.EntityFrameworkCore;
 
 public class MoneyController : Controller
 {
@@ -16,24 +17,27 @@ public class MoneyController : Controller
     {
         var service = new SessionService();
         Session session = service.Get(TempData["Session"].ToString());
+
         if (session.PaymentStatus == "paid")
         {
+            int? userId = (int)HttpContext.Session.GetInt32("userId");
+
+            Money? user = _context.Moneys
+                .Include(p => p.Giver)
+                .Where(money => money.UserId == userId)
+                .OrderByDescending(money => money.CreatedAt)
+                .FirstOrDefault();
+
             var transaction = session.PaymentIntentId.ToString();
-            return View("Success");
+            return View("Success", user);
         }
+        else
         {
-            return View("Login");
+            return View("LogReg", "Users");
         }
     }
 
-    public IActionResult Success()
-    {
-        return View();
-    }
-    public IActionResult Login()
-    {
-        return View();
-    }
+
 
 
     [HttpGet("/MoneyDonation")]
@@ -41,7 +45,7 @@ public class MoneyController : Controller
     {
         if (HttpContext.Session.GetInt32("userId") == null)
         {
-            return RedirectToAction("LogReg");
+            return RedirectToAction("LogReg", "Users");
         }
         return View();
     }

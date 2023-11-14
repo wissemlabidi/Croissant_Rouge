@@ -1,8 +1,273 @@
 ﻿@model Money
+<!DOCTYPE html>
+<html>
+@await Html.PartialAsync("_UserNav")
+
+<head>
+    <style>
+        .navbar {
+            background-color: #333;
+            /* Change the background color to your preference */
+            color: white;
+            padding: 10px;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Optionally, you can style the links in the navbar */
+        .navbar {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .red-button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .red-button:hover {
+                background-color: darkred;
+            }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .card {
+            width: 1000px;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            background: url('https://www.businessnews.com.tn/images/album/IMGBN98482croissant.png') no-repeat center/cover;
+        }
+
+        h1 {
+            text-align: left;
+            font-weight: bold;
+            margin-top: 90px;
+            width: 30%;
+            color: red;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h6 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        body {
+            background: #cccccc;
+            margin: 0;
+            width: 100%;
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        main {
+            display: block;
+            box-sizing: border-box;
+            background: #f8f7f7;
+            padding: 5px;
+            width: 100%;
+            margin: 0 auto;
+            /* Center the main horizontally */
+        }
+
+        .DT {
+            display: flex;
+            margin: 5px;
+            margin-top: 20px;
+        }
+
+        .red-button {
+            background-color: red;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .strike[_ngcontent-ttb-c39] > span[_ngcontent-ttb-c39] {
+            position: relative;
+            display: inline-block;
+            color: #fff;
+            background-color: #e11b22;
+            height: 2.4rem;
+            width: 2.4rem;
+            padding-right: 0.1rem;
+            line-height: 2.4rem;
+            border-radius: 5rem;
+            font-size: 1.2rem;
+        }
+
+        .strike[_ngcontent-ttb-c39] {
+            display: block;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 1rem;
+            font-weight: 700;
+        }
+
+            .strike[_ngcontent-ttb-c39] > span[_ngcontent-ttb-c39]:before,
+            .strike[_ngcontent-ttb-c39] > span[_ngcontent-ttb-c39]:before {
+                right: 100%;
+                margin-right: 0;
+            }
+
+            .strike[_ngcontent-ttb-c39] > span[_ngcontent-ttb-c39]:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 999rem;
+                height: 0.1rem;
+                background: #9f9fa3;
+            }
+
+            .strike[_ngcontent-ttb-c39] > span[_ngcontent-ttb-c39]:after {
+                left: 100%;
+                margin-left: 0;
+            }
+
+            .strike[_ngcontent-ttb-c39] > span[_ngcontent-ttb-c39]:before,
+            .strike[_ngcontent-ttb-c39] > span[_ngcontent-ttb-c39]:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 999rem;
+                height: 0.1rem;
+                background: #9f9fa3;
+            }
 
 
-<form method="post" asp-action="CreateMoney">
-    <input type="hidden" asp-for="UserId" value="1">
-    <input type="number" id="Amount" name="amount" asp-for="Amount" required>
-    <button class="give-button" type="submit">Donate Now</button>
-</form>
+        .payment-icon {
+            background-size: 100px 63px;
+            display: inline-block;
+            height: 63px;
+            width: 100px;
+        }
+
+        .payment-icon--visa {
+            background-image: url("https://cdn.shopify.com/s/assets/payment_icons/visa-319d545c6fd255c9aad5eeaad21fd6f7f7b4fdbdb1a35ce83b89cca12a187f00.svg");
+        }
+
+        .payment-icon--master {
+            background-image: url("https://www.attijariwafabank.com/sites/default/files/styles/medium/public/2022-02/ATTi-Tunisie%402x.png");
+        }
+
+        .payment-icon--american-express {
+            background-image: url("https://univ-internationale.com/sites/default/files/logo_biat_300x300.png");
+        }
+
+        .payment-icon--discover {
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/3e/La_Poste_tunisienne_2011.svg");
+        }
+
+        input {
+            border: 2px solid red;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="card">
+                <div class="card-content">
+                    <h1 style="color: white; font-family: Roboto, Arial, Helvetica Neue, Helvetica, sans-serif; font-weight: 900;">
+                        You Can Make <br> a Difference
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div _ngcontent-ttb-c39="" class="strike"><span _ngcontent-ttb-c39="">1</span></div>
+
+            <h3>My Donation</h3>
+            <h6 style=" margin-left:8%">I Want to Give :</h6>
+            <div style="margin: 5px; margin-left:8%">
+                <form class="btn" method="post" asp-action="CreateMoney">
+                    <input type="hidden" asp-for="UserId" value="1">
+                    <input type="submit" asp-for="Amount" value="10">
+
+                </form>
+                <form class="btn " method="post" asp-action="CreateMoney">
+                    <input type="hidden" asp-for="UserId" value="1">
+                    <input type="submit" asp-for="Amount" value="50">
+
+                </form>
+                <form class="btn " method="post" asp-action="CreateMoney">
+                    <input type="hidden" asp-for="UserId" value="1">
+                    <input type="submit" asp-for="Amount" value="100">
+
+                </form>
+                <form class="btn " method="post" asp-action="CreateMoney">
+                    <input type="hidden" asp-for="UserId" value="1">
+                    <input type="submit" asp-for="Amount" value="300">
+
+                </form>
+                <form class="btn " method="post" asp-action="CreateMoney">
+                    <input type="hidden" asp-for="UserId" value="1">
+                    <input type="submit" asp-for="Amount" value="500 ">
+
+                </form>
+
+
+
+
+            </div>
+            <form method="post" asp-action="CreateMoney">
+                <div class="DT" style=" margin-left:8%">
+
+                    <input type="hidden" asp-for="UserId" value="1">
+                    <div class="input-group mb-3" style="width: 15%;">
+                        <span class=" input-group-text">DT</span>
+                        <input asp-for="Amount" required class="form-control"
+                               aria-label=" Amount (to the nearest dollar)">
+                    </div>
+                    <button type="submit" class="red-button"
+                            style="margin-left: 20px; height: 20%; margin-top: 2px">
+                        Give
+                        Now
+                    </button>
+
+                </div>
+            </form>
+            <div _ngcontent-ttb-c39="" class="strike"><span _ngcontent-ttb-c39="">2</span></div>
+            <h3>Payment Details</h3>
+
+            <div class="container">
+                <div class="banque">
+                    <span class="payment-icon payment-icon--visa selected "></span>
+                    <span class="payment-icon payment-icon--master img-fluid"></span>
+                    <span class="payment-icon payment-icon--american-express img-fluid"></span>
+                    <span class="payment-icon payment-icon--discover img-fluid"></span>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

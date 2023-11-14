@@ -1,60 +1,67 @@
 ﻿@model User
 @await Html.PartialAsync("_AdminNavbar")
 
-<div class="card mt-3 shadow w-50 ">
-    <h2 class="card-header">Create a Shipper</h2>
-    <div class="card-body">
-        <form asp-action="CreateShipper" asp-controller="Shippers" method="post">
 
-            <div class="mb-3">
-                <label asp-for="FirstName" class="form-label"></label>
-                <input asp-for="FirstName" class="form-control">
-                <span asp-validation-for="FirstName" class="form-text text-danger h4"></span>
-            </div>
+<div class="p-5" style="display:flex;justify-content:space-evenly">
 
-            <div class="mb-3">
-                <label asp-for="LastName" class="form-label"></label>
-                <input asp-for="LastName" class="form-control">
-                <span asp-validation-for="LastName" class="form-text text-danger h4"></span>
-            </div>
 
-            <div class="mb-3">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control">
-                <span asp-validation-for="Email" class="form-text text-danger h4"></span>
-            </div> 
+    <div class="card mt-3 shadow w-50 ">
+        <h2 class="card-header">Create a Shipper</h2>
+        <div class="card-body">
+            <form asp-action="CreateShipper" asp-controller="Shippers" method="post">
 
-            <div class="mb-3">
-                <label asp-for="Phone"></label>
-                <input asp-for="Phone" class="form-control">
-                <span asp-validation-for="Phone" class="form-text text-danger h4"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="FirstName" class="form-label"></label>
+                    <input asp-for="FirstName" class="form-control">
+                    <span asp-validation-for="FirstName" class="form-text text-danger h4"></span>
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="Address"></label>
-                <input asp-for="Address" class="form-control">
-                <span asp-validation-for="Address" class="form-text text-danger h4"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="LastName" class="form-label"></label>
+                    <input asp-for="LastName" class="form-control">
+                    <span asp-validation-for="LastName" class="form-text text-danger h4"></span>
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control">
-                <span asp-validation-for="Password" class="form-text text-danger h4"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control">
+                    <span asp-validation-for="Email" class="form-text text-danger h4"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Phone"></label>
+                    <input asp-for="Phone" class="form-control">
+                    <span asp-validation-for="Phone" class="form-text text-danger h4"></span>
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control">
-                <span asp-validation-for="ConfirmPassword" class="form-text text-danger h4"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address" class="form-control">
+                    <span asp-validation-for="Address" class="form-text text-danger h4"></span>
+                </div>
 
-            <div class="mb-3">
-                <input type="hidden" asp-for="Role" Value="Shipper">
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control">
+                    <span asp-validation-for="Password" class="form-text text-danger h4"></span>
+                </div>
 
-            <div>
-                <input type="submit" value="Create Shipper" class="btn btn-success btn-lg">
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="form-control">
+                    <span asp-validation-for="ConfirmPassword" class="form-text text-danger h4"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="hidden" asp-for="Role" Value="Shipper">
+                </div>
+
+                <div>
+                    <input type="submit" value="Create Shipper" class="btn  btn-lg " style="background-color:#ff5044 ; color:white">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="margin-top:150px">
+        <img src="~/uploads/shipper.png" alt="Shipper" style="border-radius:20% ; border:solid 5px #ff5044 ; height:450px" />
     </div>
 </div>

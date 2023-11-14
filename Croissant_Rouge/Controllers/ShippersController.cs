@@ -28,8 +28,11 @@ public class ShippersController : Controller
         }
 
         int? userId = (int)HttpContext.Session.GetInt32("userId");
+        string? firstname = HttpContext.Session.GetString("FirstName");
 
-        List<Donation> AllDonations =
+
+
+       List <Donation> AllDonations =
             _context.Donations
             .Include(s => s.Donner)
             .Include(h => h.Shipment)
@@ -41,9 +44,8 @@ public class ShippersController : Controller
             .Include(g=> g.Donation)
             .ThenInclude(h => h.Donner)
             .Where(s => s.UserId == userId && s.ShipStatus == StaticData.ShipStatus.Received)
-
             .ToList();
-            
+
 
         ShipmentAndDonations vm = new ShipmentAndDonations();
         vm.Alldonations = AllDonations;

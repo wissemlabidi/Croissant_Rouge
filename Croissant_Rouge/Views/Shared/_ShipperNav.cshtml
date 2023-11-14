@@ -7,86 +7,38 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="~/css/ShipperNav.css" asp-append-version="true" />
 </head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand">Brand</a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a asp-controller="Users" asp-action="Home" class="nav-item nav-link active">Home</a>
+                <a asp-controller="Users" asp-action="Categories" class="nav-item nav-link">Categories</a>
+
+                <a asp-controller="Shippers" asp-action="ShipperDashboard" class="nav-item nav-link">All the Shipments</a>
+            </div>
 
 
-<header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow  position-top  top:0 width:100% mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Shipper</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Categories">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Shippers" asp-action="ShipperDashboard">All the Shipments</a>
-                        </li>
-                    </ul>
-                    @if (userId.HasValue)
-                    {
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <form asp-action="Logout" asp-controller="Users" method="post">
-                                    <input type="submit" value="Logout" class="btn btn-link btn-lg">
-                                </form>
-                            </li>
-                        </ul>
-
-
-                    }
-                    else
-                    {
-                        <ul class="navbar-nav">
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="LogReg">Login</a>
-                            </li>
-                        </ul>
-
-                    }
-
+            @if (userId.HasValue)
+            {
+                <div class="navbar-nav ms-auto">
+                    <form asp-action="Logout" asp-controller="Users" method="post">
+                        <input type="submit" value="Logout" class="btn  btn-lg">
+                    </form>
                 </div>
-            </div>
-        </nav>
-    </header>
 
-@* <nav class="navbar navbar-expand-custom navbar-mainbg">
-    <a class="navbar-brand navbar-logo" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars text-white"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-            <div class="hori-selector">
-                <div class="left"></div>
-                <div class="right"></div>
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Address Book</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>Components</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
-            </li>
-        </ul>
+
+            }
+            else
+            {
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="LogReg">Login</a>
+        </div>
+            }
+
+        </div>
     </div>
-</nav> *@
-
+</nav>

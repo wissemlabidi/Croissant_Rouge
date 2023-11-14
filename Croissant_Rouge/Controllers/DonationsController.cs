@@ -25,12 +25,25 @@ public class DonationsController : Controller
         {
             return RedirectToAction("LogReg", "Users");
         }
+
+       List<Money> userDonations = _context.Moneys
+        .ToList();
+        int totalAmountDonated = userDonations.Sum(m => m.Amount);
+        ViewBag.TotalAmountDonated = totalAmountDonated;
+
         List<Donation> AllDonations = _context.Donations
     .Include(donnation => donnation.Donner)
     .Where(s => s.status == StaticData.Status.Unvalid)
     .ToList();
 
-        return View(AllDonations);
+
+        MoneyandDonation br = new MoneyandDonation();
+        br.Alldonations = AllDonations;
+        br.AllMoney = userDonations;
+
+
+
+        return View(br);
     }
 
 

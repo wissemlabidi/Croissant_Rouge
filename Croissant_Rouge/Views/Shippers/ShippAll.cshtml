@@ -3,57 +3,73 @@
     string donner = $"{Model[0].Donner.FirstName} {Model[0].Donner.LastName}";
     int userId = (int)Context.Session.GetInt32("userId");
 }
+<head>
+    <meta charset="utf-8" />   
+    <link rel="stylesheet" href="~/css/ShipperSearch.css" asp-append-version="true" />
+
+</head>
 
 @await Html.PartialAsync("_ShipperNav")
-<h1>Donations Number: @Model.Count() ****** @Model</h1>
-<h1>USer id : @userId</h1>
+
 <div class="container mt-5">
     <div class="d-flex justify-content-between mb-3">
+        <div>
         <h4 class="display-6">All @donner Donations Available for Shipping </h4>
-
-
+        <h4 class="display-6">Home Adress : @Model[0].Donner.Address </h4>
+        <h4 class="display-6">Phone number : @Model[0].Donner.Phone </h4>
+        </div>
 
 
         <form asp-action="ShipManyDonations" asp-controller="Shippers" method="post">
             <input type="submit" class="btn btn-outline-primary btn-lg" value="Ship All Donations" />
-            <input type="hidden" asp-for="@Model" name="donations"/>
-         </form>
+            <input type="hidden" asp-for="@Model" name="donations" />
+        </form>
     </div>
-    <table class="table table-striped hover">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Quantity</th>
-                <th>DonnerId</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
 
-            @foreach (var a in Model)
-            {
-                <tr>
 
-                    <td>@a.Title</td>
-                    <td>@a.Category</td>
-                    <td>@a.Quantity</td>
-                    <td>@a.UserId</td>
-                    <td>
-                        @{
 
-                            Shipment newShippments = new()
-                            {
-                            UserId = (int)Context.Session.GetInt32("userId"),
-                                DonationId = a.DonationId,
-                            };
-                            @await Html.PartialAsync("_ShipDonation", newShippments)
-                        }
 
-                    </td>
-                </tr>
-            }
 
-        </tbody>
-    </table>
+
+            <div class="d-inline-block justify-content-around">
+
+
+                @foreach (var a in Model)
+                {
+
+
+                    <div class="card mb-3 style="max-width: 300px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="@a.Picture" class="img-cover card-img object-fit-fill rounded-center" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Title : @a.Title</h5>
+                                    <p class="card-text">Quantity : @a.Quantity</p>
+                                    <p class="card-text">Description : @a.Description</p>
+
+                                    @{
+
+                                        Shipment newShippments = new()
+                                        {
+                                            UserId = (int)Context.Session.GetInt32("userId"),
+                                            DonationId = a.DonationId,
+                                        };
+                                        @await Html.PartialAsync("_ShipDonation", newShippments)
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                }
+            </div>
 </div>
+
+
+
